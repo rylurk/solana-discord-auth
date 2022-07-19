@@ -15,7 +15,7 @@ export default function DiscordSignIn(props: { handleUser: (name: string, email:
       <div className="flex justify-center items-center mt-10 w-full flex-col">
         <div className="text-lg font-bold mb-8">Your account has been verified and linked!</div>
         <button className="px-4 py-2 rounded bg-[#5865F2] w-68" onClick={() => signOut()}>
-          Sign Out of Discord (Optional)
+          Sign out of Discord (optional)
         </button>
       </div>
     );
