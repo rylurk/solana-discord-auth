@@ -30,4 +30,7 @@ a {
   .auth-step {
     @apply mt-12 mx-12 w-8/12 py-8 border-2 rounded-md text-center bg-slate-800;
   }
+  .loading-spinner {
+    @apply ease-linear border-t-blue-400 animate-spin rounded-full border-gray-600;
+  }
 }
