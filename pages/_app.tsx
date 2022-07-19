@@ -14,10 +14,12 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { createDefaultAuthorizationResultCache, SolanaMobileWalletAdapter } from '@solana-mobile/wallet-adapter-mobile';
+import { SessionProvider } from 'next-auth/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const network = WalletAdapterNetwork.Devnet;
 
   const wallets = useMemo(
@@ -37,10 +39,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     [network]
   );
 
+  const queryClient = new QueryClient();
+
   return (
     <WalletProvider wallets={wallets} autoConnect>
       <WalletModalProvider>
-        <Component {...pageProps} />
+        <SessionProvider session={session}>
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+          </QueryClientProvider>
+        </SessionProvider>
       </WalletModalProvider>
     </WalletProvider>
   );
